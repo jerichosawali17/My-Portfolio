@@ -6,29 +6,251 @@
     <title>Jericho Sawali - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             background: #000000;
             color: #ffffff;
+            overflow-x: hidden;
         }
         
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #dc2626, #ef4444);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #b91c1c, #dc2626);
+        }
+        
+        /* Enhanced Gradient Text */
         .gradient-text {
-            background: linear-gradient(to right, #dc2626, #ef4444);
+            background: linear-gradient(135deg, #dc2626, #ef4444, #f87171);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            background-size: 200% 200%;
+            animation: gradient-shift 3s ease-in-out infinite;
         }
         
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Glassmorphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Pulse Glow Effect */
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(220, 38, 38, 0.5), 
+                           0 0 40px rgba(220, 38, 38, 0.3),
+                           0 0 60px rgba(220, 38, 38, 0.1);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(220, 38, 38, 0.8), 
+                           0 0 50px rgba(220, 38, 38, 0.5),
+                           0 0 70px rgba(220, 38, 38, 0.3);
+            }
+        }
+        
+        .animate-pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        /* Slide In Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-slide-left {
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        .animate-slide-right {
+            animation: slideInRight 1s ease-out;
+        }
+        
+        .animate-slide-up {
+            animation: slideInUp 1s ease-out;
+        }
+        
+        /* Enhanced Skill Bar */
         .skill-bar {
-            transition: width 1s ease-out;
+            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
         
+        .skill-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: skill-shine 2s infinite;
+        }
+        
+        @keyframes skill-shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Bounce Animation */
         @keyframes bounce-slow {
-            0%, 100% { transform: translateY(-5%); }
-            50% { transform: translateY(5%); }
+            0%, 100% { transform: translateY(-10px) scale(1); }
+            50% { transform: translateY(10px) scale(1.05); }
         }
         
         .animate-bounce-slow {
             animation: bounce-slow 3s ease-in-out infinite;
+        }
+        
+        /* Particle Background */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(220, 38, 38, 0.5);
+            border-radius: 50%;
+            animation: particle-float 10s infinite linear;
+        }
+        
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        /* Text Reveal Animation */
+        .text-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .text-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Hover Lift Effect */
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.3);
+        }
+        
+        /* Modern Button Effects */
+        .btn-modern {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-modern::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-modern:hover::before {
+            width: 300px;
+            height: 300px;
         }
         
         .line-clamp-2 {
@@ -37,28 +259,58 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+        
+        /* Scroll-triggered animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .scroll-animate.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="bg-black text-white">
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <a href="#home" class="text-2xl font-bold text-red-500 hover:text-red-400 transition-colors">JS</a>
+                <a href="#home" class="text-2xl font-bold gradient-text hover:scale-110 transition-transform duration-300">JS</a>
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-300 hover:text-red-500 transition-colors font-medium">Home</a>
-                    <a href="#about" class="text-gray-300 hover:text-red-500 transition-colors font-medium">About</a>
-                    <a href="#skills" class="text-gray-300 hover:text-red-500 transition-colors font-medium">Skills</a>
-                    <a href="#portfolio" class="text-gray-300 hover:text-red-500 transition-colors font-medium">Portfolio</a>
-                    <a href="#experience" class="text-gray-300 hover:text-red-500 transition-colors font-medium">Experience</a>
-                    <a href="#contact" class="text-gray-300 hover:text-red-500 transition-colors font-medium">Contact</a>
+                    <a href="#home" class="text-gray-300 hover:text-red-500 transition-all duration-300 font-medium hover:scale-105 relative group">
+                        Home
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#about" class="text-gray-300 hover:text-red-500 transition-all duration-300 font-medium hover:scale-105 relative group">
+                        About
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#skills" class="text-gray-300 hover:text-red-500 transition-all duration-300 font-medium hover:scale-105 relative group">
+                        Skills
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#portfolio" class="text-gray-300 hover:text-red-500 transition-all duration-300 font-medium hover:scale-105 relative group">
+                        Portfolio
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#experience" class="text-gray-300 hover:text-red-500 transition-all duration-300 font-medium hover:scale-105 relative group">
+                        Experience
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#contact" class="text-gray-300 hover:text-red-500 transition-all duration-300 font-medium hover:scale-105 relative group">
+                        Contact
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
                 </div>
                 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-gray-300">
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-red-500 transition-colors p-2 rounded-lg hover:bg-red-500/10">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -67,41 +319,49 @@
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800">
+        <div id="mobile-menu" class="hidden md:hidden glass-dark border-t border-gray-700">
             <div class="px-4 py-4 space-y-3">
-                <a href="#home" class="block text-gray-300 hover:text-red-500 transition-colors font-medium py-2">Home</a>
-                <a href="#about" class="block text-gray-300 hover:text-red-500 transition-colors font-medium py-2">About</a>
-                <a href="#skills" class="block text-gray-300 hover:text-red-500 transition-colors font-medium py-2">Skills</a>
-                <a href="#portfolio" class="block text-gray-300 hover:text-red-500 transition-colors font-medium py-2">Portfolio</a>
-                <a href="#experience" class="block text-gray-300 hover:text-red-500 transition-colors font-medium py-2">Experience</a>
-                <a href="#contact" class="block text-gray-300 hover:text-red-500 transition-colors font-medium py-2">Contact</a>
+                <a href="#home" class="block text-gray-300 hover:text-red-500 transition-all duration-300 font-medium py-2 hover:pl-2">Home</a>
+                <a href="#about" class="block text-gray-300 hover:text-red-500 transition-all duration-300 font-medium py-2 hover:pl-2">About</a>
+                <a href="#skills" class="block text-gray-300 hover:text-red-500 transition-all duration-300 font-medium py-2 hover:pl-2">Skills</a>
+                <a href="#portfolio" class="block text-gray-300 hover:text-red-500 transition-all duration-300 font-medium py-2 hover:pl-2">Portfolio</a>
+                <a href="#experience" class="block text-gray-300 hover:text-red-500 transition-all duration-300 font-medium py-2 hover:pl-2">Experience</a>
+                <a href="#contact" class="block text-gray-300 hover:text-red-500 transition-all duration-300 font-medium py-2 hover:pl-2">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center bg-gradient-to-br from-gray-900 via-black to-gray-900 pt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <section id="home" class="min-h-screen flex items-center relative overflow-hidden pt-16">
+        <!-- Particle Background -->
+        <div class="particles" id="particles"></div>
+        
+        <!-- Animated Background Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-red-900/20 via-black to-gray-900/30">
+            <div class="absolute inset-0 bg-gradient-to-tl from-blue-900/10 via-transparent to-purple-900/10 animate-pulse"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <!-- Text Content -->
-                <div class="space-y-6">
-                    <div class="space-y-2">
-                        <p class="text-red-500 font-semibold text-lg">Hello, I'm</p>
-                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">Jericho Sawali</h1>
-                        <p id="typing-title" class="text-2xl sm:text-3xl text-gray-400 font-medium">Graphic Designer & Web Developer</p>
+                <div class="space-y-8 animate-slide-left">
+                    <div class="space-y-4">
+                        <p class="text-red-500 font-semibold text-lg text-reveal">Hello, I'm</p>
+                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight gradient-text animate-slide-left" style="animation-delay: 0.2s">Jericho Sawali</h1>
+                        <p id="typing-title" class="text-2xl sm:text-3xl text-gray-400 font-medium text-reveal" style="animation-delay: 0.4s">Graphic Designer & Web Developer</p>
                     </div>
-                    <p class="text-lg text-gray-400 leading-relaxed max-w-xl">
+                    <p class="text-lg text-gray-400 leading-relaxed max-w-xl text-reveal" style="animation-delay: 0.6s">
                         I'm a creative Graphic Designer and Web Developer passionate about blending design and technology. 
                         I specialize in crafting visually engaging graphics and building responsive, user-friendly websites that bring ideas to life.
                     </p>
-                    <div class="flex flex-wrap gap-4 pt-4">
-                        <a href="#portfolio" class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-all shadow-lg shadow-red-500/50">
+                    <div class="flex flex-wrap gap-4 pt-4 text-reveal" style="animation-delay: 0.8s">
+                        <a href="#portfolio" class="btn-modern inline-flex items-center px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl font-semibold transition-all shadow-lg shadow-red-500/50 hover:shadow-xl hover:shadow-red-500/70 hover-lift">
                             View My Work
                             <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                             </svg>
                         </a>
-                        <a href="#contact" class="inline-flex items-center px-6 py-3 border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white rounded-lg font-medium transition-all">
+                        <a href="#contact" class="btn-modern inline-flex items-center px-8 py-4 border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white rounded-xl font-semibold transition-all hover:shadow-lg hover:shadow-red-500/50 hover-lift">
                             <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                             </svg>
@@ -111,24 +371,29 @@
                 </div>
 
                 <!-- Image -->
-                <div class="relative lg:order-last">
+                <div class="relative lg:order-last animate-slide-right">
                     <div class="relative w-full max-w-md mx-auto">
-                        <div class="absolute inset-0 bg-gradient-to-br from-red-600 to-red-900 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                        <div class="relative bg-gradient-to-br from-red-900/20 to-gray-900/40 rounded-3xl p-8 shadow-2xl border border-red-500/20">
+                        <!-- Glow Effect -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-red-600 to-red-900 rounded-full blur-3xl opacity-30 animate-pulse-glow"></div>
+                        
+                        <!-- Main Image Container -->
+                        <div class="relative glass-dark rounded-3xl p-8 shadow-2xl border border-red-500/20 hover-lift animate-float">
                             <div class="aspect-square bg-gray-800 rounded-2xl overflow-hidden relative">
                                 <img src="https://customer-assets.emergentagent.com/job_portfolio-from-pdf-1/artifacts/h0fsg506_IMG20241123133659.jpg" 
                                      alt="Jericho Sawali" 
-                                     class="w-full h-full object-cover"
+                                     class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                                      style="filter: contrast(1.1) brightness(0.9); mix-blend-mode: luminosity;">
                                 <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent"></div>
                             </div>
                         </div>
-                        <div class="absolute -top-4 -right-4 bg-red-600 text-white rounded-2xl p-4 shadow-lg shadow-red-500/50 animate-bounce-slow">
-                            <p class="text-sm font-semibold">5+ Years</p>
-                            <p class="text-xs">Experience</p>
+                        
+                        <!-- Floating Badges -->
+                        <div class="absolute -top-4 -right-4 glass-dark text-white rounded-2xl p-4 shadow-lg shadow-red-500/50 animate-bounce-slow border border-red-500/30">
+                            <p class="text-sm font-semibold text-red-400">5+ Years</p>
+                            <p class="text-xs text-gray-300">Experience</p>
                         </div>
-                        <div class="absolute -bottom-4 -left-4 bg-gray-800 border border-red-500/30 text-white rounded-2xl p-4 shadow-lg">
-                            <p class="text-2xl font-bold text-red-500">100+</p>
+                        <div class="absolute -bottom-4 -left-4 glass-dark border border-red-500/30 text-white rounded-2xl p-4 shadow-lg hover-lift">
+                            <p class="text-2xl font-bold gradient-text">100+</p>
                             <p class="text-xs text-gray-400">Projects Done</p>
                         </div>
                     </div>
@@ -201,53 +466,53 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="p-6 text-center bg-gray-800 border-2 border-gray-700 hover:border-red-500/50 rounded-2xl hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300 hover:-translate-y-1">
+                    <div class="p-6 text-center glass-dark border-2 border-gray-700 hover:border-red-500/50 rounded-2xl hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300 hover:-translate-y-1 hover-lift group">
                         <div class="flex justify-center mb-4">
-                            <div class="p-3 bg-red-500/20 rounded-2xl">
-                                <svg class="h-8 w-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="p-3 bg-red-500/20 rounded-2xl group-hover:bg-red-500/30 transition-colors">
+                                <svg class="h-8 w-8 text-red-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
                                 </svg>
                             </div>
                         </div>
-                        <p class="text-2xl font-bold text-white mb-1">100+ Projects</p>
-                        <p class="text-sm text-gray-400">Graphic Design</p>
+                        <p class="text-2xl font-bold text-white mb-1 group-hover:text-red-400 transition-colors">100+ Projects</p>
+                        <p class="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">Graphic Design</p>
                     </div>
                     
-                    <div class="p-6 text-center bg-gray-800 border-2 border-gray-700 hover:border-red-500/50 rounded-2xl hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300 hover:-translate-y-1">
+                    <div class="p-6 text-center glass-dark border-2 border-gray-700 hover:border-red-500/50 rounded-2xl hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300 hover:-translate-y-1 hover-lift group">
                         <div class="flex justify-center mb-4">
-                            <div class="p-3 bg-red-500/20 rounded-2xl">
-                                <svg class="h-8 w-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="p-3 bg-red-500/20 rounded-2xl group-hover:bg-red-500/30 transition-colors">
+                                <svg class="h-8 w-8 text-red-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
                                 </svg>
                             </div>
                         </div>
-                        <p class="text-2xl font-bold text-white mb-1">50+ Websites</p>
-                        <p class="text-sm text-gray-400">Web Development</p>
+                        <p class="text-2xl font-bold text-white mb-1 group-hover:text-red-400 transition-colors">50+ Websites</p>
+                        <p class="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">Web Development</p>
                     </div>
                     
-                    <div class="p-6 text-center bg-gray-800 border-2 border-gray-700 hover:border-red-500/50 rounded-2xl hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300 hover:-translate-y-1">
+                    <div class="p-6 text-center glass-dark border-2 border-gray-700 hover:border-red-500/50 rounded-2xl hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300 hover:-translate-y-1 hover-lift group">
                         <div class="flex justify-center mb-4">
-                            <div class="p-3 bg-red-500/20 rounded-2xl">
-                                <svg class="h-8 w-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="p-3 bg-red-500/20 rounded-2xl group-hover:bg-red-500/30 transition-colors">
+                                <svg class="h-8 w-8 text-red-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
                             </div>
                         </div>
-                        <p class="text-2xl font-bold text-white mb-1">500+ Shots</p>
-                        <p class="text-sm text-gray-400">Photography</p>
+                        <p class="text-2xl font-bold text-white mb-1 group-hover:text-red-400 transition-colors">500+ Shots</p>
+                        <p class="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">Photography</p>
                     </div>
                     
-                    <div class="p-6 text-center bg-gray-800 border-2 border-gray-700 hover:border-red-500/50 rounded-2xl hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300 hover:-translate-y-1">
+                    <div class="p-6 text-center glass-dark border-2 border-gray-700 hover:border-red-500/50 rounded-2xl hover:shadow-xl hover:shadow-red-500/20 transition-all duration-300 hover:-translate-y-1 hover-lift group">
                         <div class="flex justify-center mb-4">
-                            <div class="p-3 bg-red-500/20 rounded-2xl">
-                                <svg class="h-8 w-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="p-3 bg-red-500/20 rounded-2xl group-hover:bg-red-500/30 transition-colors">
+                                <svg class="h-8 w-8 text-red-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
                                 </svg>
                             </div>
                         </div>
-                        <p class="text-2xl font-bold text-white mb-1">5+ Years</p>
-                        <p class="text-sm text-gray-400">Experience</p>
+                        <p class="text-2xl font-bold text-white mb-1 group-hover:text-red-400 transition-colors">5+ Years</p>
+                        <p class="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">Experience</p>
                     </div>
                 </div>
             </div>
@@ -269,129 +534,129 @@
                     <button onclick="showSkills('other')" class="skill-tab px-6 py-2 rounded-lg bg-gray-800 text-gray-400 font-medium" data-tab="other">Other</button>
                 </div>
 
-                <div id="skills-content" class="p-8 bg-gray-800 border border-gray-700 rounded-2xl">
+                <div id="skills-content" class="p-8 glass-dark border border-gray-700 rounded-2xl">
                     <div id="graphics-skills" class="space-y-6">
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">Adobe Photoshop</span>
                                 <span class="text-sm text-red-500 font-semibold">90%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 90%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="90%"></div>
                             </div>
                         </div>
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">Adobe Illustrator</span>
                                 <span class="text-sm text-red-500 font-semibold">85%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 85%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="85%"></div>
                             </div>
                         </div>
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">Canva Design</span>
                                 <span class="text-sm text-red-500 font-semibold">95%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 95%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="95%"></div>
                             </div>
                         </div>
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">Logo & Branding</span>
                                 <span class="text-sm text-red-500 font-semibold">88%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 88%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="88%"></div>
                             </div>
                         </div>
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">Photo Editing</span>
                                 <span class="text-sm text-red-500 font-semibold">92%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 92%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="92%"></div>
                             </div>
                         </div>
                     </div>
 
                     <div id="web-skills" class="space-y-6 hidden">
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">HTML5/CSS3</span>
                                 <span class="text-sm text-red-500 font-semibold">95%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 95%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="95%"></div>
                             </div>
                         </div>
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">JavaScript (ES6+)</span>
                                 <span class="text-sm text-red-500 font-semibold">88%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 88%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="88%"></div>
                             </div>
                         </div>
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">React & Tailwind</span>
                                 <span class="text-sm text-red-500 font-semibold">85%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 85%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="85%"></div>
                             </div>
                         </div>
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">PHP & Node.js</span>
                                 <span class="text-sm text-red-500 font-semibold">80%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 80%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="80%"></div>
                             </div>
                         </div>
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">WordPress/CMS</span>
                                 <span class="text-sm text-red-500 font-semibold">90%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 90%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="90%"></div>
                             </div>
                         </div>
                     </div>
 
                     <div id="other-skills" class="space-y-6 hidden">
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">Video Editing</span>
                                 <span class="text-sm text-red-500 font-semibold">85%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 85%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="85%"></div>
                             </div>
                         </div>
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">Photography</span>
                                 <span class="text-sm text-red-500 font-semibold">88%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 88%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="88%"></div>
                             </div>
                         </div>
-                        <div class="space-y-2">
+                        <div class="space-y-2 skill-item">
                             <div class="flex justify-between items-center">
                                 <span class="font-medium text-gray-300">UI/UX Design</span>
                                 <span class="text-sm text-red-500 font-semibold">82%</span>
                             </div>
                             <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 82%"></div>
+                                <div class="h-full bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-lg shadow-red-500/50 skill-bar" style="width: 0%" data-width="82%"></div>
                             </div>
                         </div>
                     </div>
@@ -419,12 +684,12 @@
             <!-- Work Gallery -->
             <div id="work-gallery" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Graphic Design Works -->
-                <div class="work-item graphics" data-category="graphics">
-                    <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-700 hover:border-red-500 transition-all duration-300 cursor-pointer" onclick="openModal(0)">
+                <div class="work-item graphics scroll-animate" data-category="graphics">
+                    <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-700 hover:border-red-500 transition-all duration-300 cursor-pointer hover-lift" onclick="openModal(0)">
                         <img src="images/SOOIAL MEDIA ADVERTISEMENTS/Copy of TAKUSA BANNER.png"
                         alt="Landscape Photography" 
-                        class="thumbnail w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-300">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        class="thumbnail w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="absolute bottom-0 left-0 right-0 p-6">
                                 <h3 class="text-xl font-bold text-white mb-2">Takusa Ramen Shop - Promo</h3>
                                 <p class="text-gray-300 text-sm">Social media advertising campaign with pricing and menu designs</p>
@@ -437,12 +702,12 @@
                     </div>
                 </div>
 
-                <div class="work-item graphics" data-category="graphics">
-                    <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-700 hover:border-red-500 transition-all duration-300 cursor-pointer" onclick="openModal(1)">
+                <div class="work-item graphics scroll-animate" data-category="graphics" style="animation-delay: 0.1s">
+                    <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-700 hover:border-red-500 transition-all duration-300 cursor-pointer hover-lift" onclick="openModal(1)">
                         <img src="https://customer-assets.emergentagent.com/job_portfolio-from-pdf-1/artifacts/16zzgf14_2.jpg" 
                              alt="Takusa Ramen Shop - Rainy Days Campaign" 
-                             class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-300">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                             class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="absolute bottom-0 left-0 right-0 p-6">
                                 <h3 class="text-xl font-bold text-white mb-2">Rainy Days Campaign</h3>
                                 <p class="text-gray-300 text-sm">Seasonal promotional design for Takusa Ramen Shop</p>
@@ -455,12 +720,12 @@
                     </div>
                 </div>
 
-                <div class="work-item graphics" data-category="graphics">
-                    <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-700 hover:border-red-500 transition-all duration-300 cursor-pointer" onclick="openModal(2)">
+                <div class="work-item graphics scroll-animate" data-category="graphics" style="animation-delay: 0.2s">
+                    <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-700 hover:border-red-500 transition-all duration-300 cursor-pointer hover-lift" onclick="openModal(2)">
                         <img src="https://customer-assets.emergentagent.com/job_portfolio-from-pdf-1/artifacts/50z0qjag_3.jpg" 
                              alt="Independence Day Special Design" 
-                             class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-300">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                             class="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="absolute bottom-0 left-0 right-0 p-6">
                                 <h3 class="text-xl font-bold text-white mb-2">Independence Day Special</h3>
                                 <p class="text-gray-300 text-sm">Patriotic themed promotional material for national celebration</p>
@@ -473,7 +738,7 @@
                     </div>
                 </div>
 
-                <div class="work-item graphics" data-category="graphics">
+                <div class="work-item graphics scroll-animate" data-category="graphics" style="animation-delay: 0.3s">
                     <div class="group relative overflow-hidden rounded-2xl border-2 border-gray-700 hover:border-red-500 transition-all duration-300 cursor-pointer" onclick="openModal(3)">
                         <img src="https://customer-assets.emergentagent.com/job_portfolio-from-pdf-1/artifacts/ht6s4b45_12.jpg" 
                              alt="Buy 1 Take 1 Deals Promotion" 
@@ -744,22 +1009,30 @@
         </div>
     </section>
 
-    <!-- Modal for Full Image View -->
-    <!-- Modal for Full Image View -->
-<div id="imageModal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4" onclick="closeModal()">
-  <div class="relative max-w-6xl w-full" onclick="event.stopPropagation()">
-    <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-red-500 transition-colors z-10">
-      <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-    </button>
-    <img id="modalImage" src="" alt="" class="w-full h-auto rounded-2xl">
-    <div class="mt-4 text-center">
-      <h3 id="modalTitle" class="text-2xl font-bold text-white mb-2"></h3>
-      <p id="modalDescription" class="text-gray-400"></p>
+    <!-- Enhanced Modal for Work Gallery -->
+    <div id="imageModal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4" onclick="closeModal()">
+        <div class="relative max-w-7xl w-full max-h-[90vh] overflow-hidden" onclick="event.stopPropagation()">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="modalTitle" class="text-3xl font-bold text-white">Work Gallery</h2>
+                <button onclick="closeModal()" class="text-white hover:text-red-500 transition-colors p-2 rounded-lg hover:bg-red-500/10">
+                    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[70vh] overflow-y-auto pr-2">
+                <!-- Gallery items will be dynamically inserted here -->
+            </div>
+            
+            <!-- Modal Description -->
+            <div class="mt-6 text-center">
+                <p id="modalDescription" class="text-gray-400"></p>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 
     <!-- Contact Section -->
@@ -928,7 +1201,7 @@
             }
         });
 
-        // Skills tab switching
+        // Skills tab switching with animation
         function showSkills(tab) {
             // Hide all skill sections
             document.getElementById('graphics-skills').classList.add('hidden');
@@ -936,15 +1209,26 @@
             document.getElementById('other-skills').classList.add('hidden');
             
             // Show selected section
-            document.getElementById(tab + '-skills').classList.remove('hidden');
+            const selectedSection = document.getElementById(tab + '-skills');
+            selectedSection.classList.remove('hidden');
+            
+            // Animate skill bars
+            const skillBars = selectedSection.querySelectorAll('.skill-bar');
+            skillBars.forEach((bar, index) => {
+                const width = bar.getAttribute('data-width');
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, index * 100);
+            });
             
             // Update tab styles
             document.querySelectorAll('.skill-tab').forEach(btn => {
-                btn.classList.remove('bg-red-600', 'text-white');
+                btn.classList.remove('bg-red-600', 'text-white', 'btn-modern');
                 btn.classList.add('bg-gray-800', 'text-gray-400');
             });
-            document.querySelector(`[data-tab="${tab}"]`).classList.add('bg-red-600', 'text-white');
-            document.querySelector(`[data-tab="${tab}"]`).classList.remove('bg-gray-800', 'text-gray-400');
+            const activeTab = document.querySelector(`[data-tab="${tab}"]`);
+            activeTab.classList.add('bg-red-600', 'text-white', 'btn-modern');
+            activeTab.classList.remove('bg-gray-800', 'text-gray-400');
         }
 
         function showWork(category) {
@@ -954,22 +1238,291 @@
             tabs.forEach(tab => {
                 if (tab.dataset.category === category) {
                     tab.classList.remove('bg-gray-800', 'text-gray-400');
-                    tab.classList.add('bg-red-600', 'text-white');
+                    tab.classList.add('bg-red-600', 'text-white', 'btn-modern');
                 } else {
-                    tab.classList.remove('bg-red-600', 'text-white');
+                    tab.classList.remove('bg-red-600', 'text-white', 'btn-modern');
                     tab.classList.add('bg-gray-800', 'text-gray-400');
                 }
             });
 
-            allItems.forEach(item => {
+            allItems.forEach((item, index) => {
                 if (category === 'all' || item.dataset.category === category) {
-                  item.style.display = 'block';
-              } else {
-                  item.style.display = 'none';
-              }
-          });
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.classList.add('animated');
+                    }, index * 100);
+                } else {
+                    item.style.display = 'none';
+                }
+            });
         }
 
+        // Particle generation
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Text reveal animation
+        function animateTextReveal() {
+            const textElements = document.querySelectorAll('.text-reveal');
+            textElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('active');
+                }, index * 200);
+            });
+        }
+
+        // Scroll-triggered animations
+        function handleScrollAnimations() {
+            const scrollElements = document.querySelectorAll('.scroll-animate');
+            
+            scrollElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                
+                if (elementTop < window.innerHeight && elementBottom > 0) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        // Initialize animations
+        window.addEventListener('load', () => {
+            createParticles();
+            animateTextReveal();
+            handleScrollAnimations();
+            
+            // Initialize first skill tab with animation
+            setTimeout(() => {
+                showSkills('graphics');
+            }, 1000);
+        });
+
+        window.addEventListener('scroll', handleScrollAnimations);
+
+
+        // Work Gallery Data
+        const workGalleryData = {
+            graphics: [
+                {
+                    title: "Takusa Ramen Shop - Promo",
+                    description: "Social media advertising campaign with pricing and menu designs",
+                    images: [
+                        "images/SOOIAL MEDIA ADVERTISEMENTS/Copy of TAKUSA BANNER.png",
+                        "https://customer-assets.emergentagent.com/job_portfolio-from-pdf-1/artifacts/16zzgf14_2.jpg",
+                        "https://customer-assets.emergentagent.com/job_portfolio-from-pdf-1/artifacts/50z0qjag_3.jpg",
+                        "https://customer-assets.emergentagent.com/job_portfolio-from-pdf-1/artifacts/ht6s4b45_12.jpg"
+                    ],
+                    tags: ["Social Media", "Branding", "Advertising"]
+                },
+                {
+                    title: "Rainy Days Campaign",
+                    description: "Seasonal promotional design for Takusa Ramen Shop",
+                    images: [
+                        "https://customer-assets.emergentagent.com/job_portfolio-from-pdf-1/artifacts/16zzgf14_2.jpg",
+                        "https://customer-assets.emergentagent.com/job_portfolio-from-pdf-1/artifacts/50z0qjag_3.jpg"
+                    ],
+                    tags: ["Advertising", "Print Design"]
+                },
+                {
+                    title: "Independence Day Special",
+                    description: "Patriotic themed promotional material for national celebration",
+                    images: [
+                        "https://customer-assets.emergentagent.com/job_portfolio-from-pdf-1/artifacts/50z0qjag_3.jpg",
+                        "https://customer-assets.emergentagent.com/job_portfolio-from-pdf-1/artifacts/ht6s4b45_12.jpg"
+                    ],
+                    tags: ["Events", "Social Media"]
+                },
+                {
+                    title: "Buy 1 Take 1 Deals",
+                    description: "Promotional design for special combo offers and deals",
+                    images: [
+                        "https://customer-assets.emergentagent.com/job_portfolio-from-pdf-1/artifacts/ht6s4b45_12.jpg",
+                        "images/SOOIAL MEDIA ADVERTISEMENTS/Copy of TAKUSA BANNER.png"
+                    ],
+                    tags: ["Advertising", "Marketing"]
+                }
+            ],
+            web: [
+                {
+                    title: "Sales & Inventory System",
+                    description: "Full-stack management system with analytics",
+                    images: [
+                        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+                        "images/MY WEB SYSTEMS/sketch-web-design-templates-6.jpeg",
+                        "images/MY WEB SYSTEMS/1_HYl1MCsK8LAC5RZD8y8Unw.png"
+                    ],
+                    tags: ["React", "Dashboard", "Full-stack"]
+                },
+                {
+                    title: "DOLE Management Systems",
+                    description: "Government information management platforms",
+                    images: [
+                        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+                        "images/MY WEB SYSTEMS/sketch-web-design-templates-6.jpeg"
+                    ],
+                    tags: ["Government", "PHP", "Database"]
+                },
+                {
+                    title: "Web Designing",
+                    description: "UI/UX Designing",
+                    images: [
+                        "images/MY WEB SYSTEMS/sketch-web-design-templates-6.jpeg",
+                        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+                    ],
+                    tags: ["UI/UX", "Design", "Frontend"]
+                },
+                {
+                    title: "Data Management and Analytics",
+                    description: "Managing database and information with SQL and Queries",
+                    images: [
+                        "images/MY WEB SYSTEMS/1_HYl1MCsK8LAC5RZD8y8Unw.png",
+                        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+                    ],
+                    tags: ["Database", "Analytics", "Backend"]
+                }
+            ],
+            photography: [
+                {
+                    title: "Portrait Photography",
+                    description: "Creative portrait sessions with diverse subjects",
+                    images: [
+                        "images/MY PHOTOGRAPHY/IMG_20241214_140031.jpg",
+                        "images/MY PHOTOGRAPHY/IMG_20250315_141112.jpg"
+                    ],
+                    tags: ["Portraits", "Studio", "Creative"]
+                },
+                {
+                    title: "Landscape & Nature",
+                    description: "Stunning scenery from beaches to mountains",
+                    images: [
+                        "images/MY PHOTOGRAPHY/IMG_20250315_141112.jpg",
+                        "images/MY PHOTOGRAPHY/IMG_20240309_161228.jpg",
+                        "images/MY PHOTOGRAPHY/IMG_20250214_084811.jpg"
+                    ],
+                    tags: ["Landscape", "Nature", "Travel"]
+                },
+                {
+                    title: "Urban Photography",
+                    description: "City life and architectural photography",
+                    images: [
+                        "images/MY PHOTOGRAPHY/IMG_20240309_161228.jpg",
+                        "images/MY PHOTOGRAPHY/IMG_20250214_084811.jpg"
+                    ],
+                    tags: ["Urban", "Architecture", "Street"]
+                },
+                {
+                    title: "Nature's Beauty",
+                    description: "Capturing the essence of natural landscapes",
+                    images: [
+                        "images/MY PHOTOGRAPHY/IMG_20250214_084811.jpg",
+                        "images/MY PHOTOGRAPHY/IMG_20241214_140031.jpg"
+                    ],
+                    tags: ["Nature", "Landscape", "Fine Art"]
+                }
+            ]
+        };
+
+        // Enhanced Modal Functions
+        function openModal(workIndex) {
+            const modal = document.getElementById('imageModal');
+            const galleryGrid = document.getElementById('galleryGrid');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            // Get current active category
+            const activeWorkItems = document.querySelectorAll('.work-item:not([style*="display: none"])');
+            const activeItem = activeWorkItems[workIndex];
+            
+            if (!activeItem) return;
+            
+            const category = activeItem.dataset.category;
+            const categoryData = workGalleryData[category];
+            const workData = categoryData[workIndex % categoryData.length];
+            
+            // Update modal header
+            modalTitle.textContent = workData.title;
+            modalDescription.textContent = workData.description;
+            
+            // Clear existing gallery
+            galleryGrid.innerHTML = '';
+            
+            // Add images to gallery
+            workData.images.forEach((imageSrc, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'relative group overflow-hidden rounded-2xl border-2 border-gray-700 hover:border-red-500 transition-all duration-300 cursor-pointer hover-lift';
+                galleryItem.innerHTML = `
+                    <img src="${imageSrc}" 
+                         alt="${workData.title} - Image ${index + 1}" 
+                         class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                            <div class="flex gap-2 flex-wrap">
+                                ${workData.tags.map(tag => `<span class="px-2 py-1 bg-red-500/20 text-red-400 text-xs rounded-full border border-red-500/30">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Add click event for full image view
+                galleryItem.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showFullImage(imageSrc, workData.title);
+                });
+                
+                galleryGrid.appendChild(galleryItem);
+            });
+            
+            // Show modal with animation
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 10);
+        }
+        
+        function showFullImage(imageSrc, title) {
+            // Create full image overlay
+            const fullImageOverlay = document.createElement('div');
+            fullImageOverlay.className = 'fixed inset-0 bg-black/98 z-[60] flex items-center justify-center p-4';
+            fullImageOverlay.innerHTML = `
+                <div class="relative max-w-5xl w-full max-h-[80vh] flex flex-col items-center">
+                    <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-4 text-white hover:text-red-500 transition-colors p-2 rounded-lg hover:bg-red-500/10 z-10">
+                        <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                    <div class="w-full h-auto max-h-[60vh] overflow-hidden rounded-2xl shadow-2xl">
+                        <img src="${imageSrc}" alt="${title}" class="w-full h-full object-contain">
+                    </div>
+                    <p class="text-center text-white mt-4 text-lg">${title}</p>
+                </div>
+            `;
+            
+            document.body.appendChild(fullImageOverlay);
+            
+            // Close on click outside
+            fullImageOverlay.addEventListener('click', (e) => {
+                if (e.target === fullImageOverlay) {
+                    fullImageOverlay.remove();
+                }
+            });
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('opacity-100');
+        }
 
         // Contact form submission
         document.getElementById('contact-form').addEventListener('submit', function(e) {
